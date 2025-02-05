@@ -12,7 +12,6 @@ import {
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { MenuIcon } from "lucide-react";
-import { useTheme } from "next-themes";
 import { signOut } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 import { Badge } from "./ui/badge";
@@ -22,7 +21,7 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <div className="w-[90%] max-w-screen-lg p-3 flex items-center justify-between fixed top-4 left-1/2 transform -translate-x-1/2 border shadow-md rounded-lg">
+    <div className="w-[90%] max-w-screen-lg p-3 flex items-center justify-between fixed top-4 left-1/2 transform -translate-x-1/2 border shadow-md rounded-lg bg-background text-foreground z-50">
       <h1 className="font-semibold">NexGen 2.0</h1>
       {user ? (
         <DropdownMenu>

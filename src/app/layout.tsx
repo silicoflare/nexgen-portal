@@ -10,6 +10,8 @@ import {
   Raleway,
 } from "next/font/google";
 import { Toaster } from "sonner";
+import Navbar from "@/components/Navbar";
+import NavLayout from "./NavLayout";
 
 export const metadata: Metadata = {
   title: "NexGen 2.0",
@@ -34,8 +36,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${raleway.className} antialiased`}>
-        <Toaster richColors position="top-center" className="z-50" />
-        <ThemeProvider attribute="class">{children}</ThemeProvider>
+        <Toaster richColors position="bottom-center" className="z-50" />
+        <ThemeProvider attribute="class">
+          <NavLayout>{children}</NavLayout>
+        </ThemeProvider>
       </body>
     </html>
   );
