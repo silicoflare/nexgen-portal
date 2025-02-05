@@ -7,3 +7,4 @@ const db = client.db("nexgen");
 export const users = db.collection("users");
 export const teams = db.collection("teams");
 export const students = db.collection("students");
+export const snacks = db.collection("snacks");

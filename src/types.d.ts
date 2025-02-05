@@ -30,3 +30,10 @@ export type Student = {
     consentTaken?: boolean;
   };
 };
+
+export interface Snack {
+  id: string;
+  name: string;
+  desc: string;
+  log: number[];
+}
