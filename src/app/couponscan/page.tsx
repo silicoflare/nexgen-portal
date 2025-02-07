@@ -1,7 +1,8 @@
 import { couponTypes } from "@/data/constants";
 import CouponScanner from "./CouponScanner";
+import { withAuth } from "@/withAuth";
 
-export default function CouponScan() {
+function CouponScan() {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-3">
       <h1 className="text-2xl font-bold">Scan Food Coupons</h1>
@@ -13,3 +14,6 @@ export default function CouponScan() {
     </div>
   );
 }
+
+CouponScan.auth = ["vendor"];
+export default withAuth(CouponScan);
