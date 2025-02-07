@@ -5,12 +5,7 @@ import env from "../../../../env";
 import { students, teams } from "@/lib/db";
 import { Team } from "@/types";
 
-export async function getEntryDetails(code: string) {
-  const key = await importKey(env.ENTRY_KEY);
-  const val = await decrypt(code, key);
-
-  const teamNo = parseInt(Array.from(val.matchAll(/T(\d{1,2})_ENTRY/gm))[0][1]);
-
+export async function getEntryDetails(teamNo: number) {
   const { _id, entryPass, ...teamDetails } = (await teams.findOne({
     teamNo,
   }))!;

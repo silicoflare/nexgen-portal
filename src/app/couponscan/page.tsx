@@ -1,3 +1,5 @@
+"use client";
+
 import { couponTypes } from "@/data/constants";
 import CouponScanner from "./CouponScanner";
 import { withAuth } from "@/withAuth";

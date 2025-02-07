@@ -7,6 +7,8 @@ import { withAuth } from "@/withAuth";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
+import { getTeamNumber } from "./fx";
+import { toast } from "sonner";
 
 function ScanPass() {
   const [, setVal] = useAtom(entryAtom);
@@ -36,9 +38,19 @@ function ScanPass() {
               aspectRatio: "1 / 1",
             },
           }}
-          onScan={(result) => {
-            setVal(result[0].rawValue);
-            router.push("/scanpass/checkin");
+          onScan={async (result) => {
+            const teamNo = await getTeamNumber(result[0].rawValue);
+
+            switch (teamNo) {
+              case 401:
+              case 404:
+                toast.error("Invalid QR code");
+                break;
+
+              default:
+                setVal(teamNo);
+                router.push("/scanpass/checkin");
+            }
           }}
           allowMultiple={true}
           scanDelay={1000}

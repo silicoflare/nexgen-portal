@@ -25,7 +25,7 @@ function CheckIn() {
   });
 
   useEffect(() => {
-    if (val === "" || !val) {
+    if (val === 0 || !val) {
       router.push("/scanpass");
     }
   }, [val, router]);
