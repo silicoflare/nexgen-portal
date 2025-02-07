@@ -12,6 +12,7 @@ import {
 import { Toaster } from "sonner";
 import Navbar from "@/components/Navbar";
 import NavLayout from "./NavLayout";
+import SessionHandler from "./SessionHandler";
 
 export const metadata: Metadata = {
   title: "NexGen 2.0",
@@ -36,10 +37,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${raleway.className} antialiased`}>
-        <Toaster richColors position="bottom-center" className="z-50" />
-        <ThemeProvider attribute="class">
-          <NavLayout>{children}</NavLayout>
-        </ThemeProvider>
+        <SessionHandler>
+          <Toaster richColors position="bottom-center" className="z-50" />
+          <ThemeProvider attribute="class">
+            <NavLayout>{children}</NavLayout>
+          </ThemeProvider>
+        </SessionHandler>
       </body>
     </html>
   );

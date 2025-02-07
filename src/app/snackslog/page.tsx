@@ -8,8 +8,9 @@ import SnackCard from "./SnackCard";
 import { useAtom } from "jotai";
 import { snackMutateAtom } from "@/lib/atoms";
 import { useEffect } from "react";
+import { withAuth } from "@/withAuth";
 
-export default function SnacksLog() {
+function SnacksLog() {
   const { data, isLoading, mutate } = useSWR(
     "snacks",
     async () => await getSnacksList()
@@ -39,3 +40,6 @@ export default function SnacksLog() {
     </div>
   );
 }
+
+SnacksLog.auth = ["admin"];
+export default withAuth(SnacksLog);

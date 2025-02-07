@@ -1,5 +1,5 @@
 import { encrypt, importKey } from "@/lib/crypto";
-import { client, students, teams, users } from "@/lib/db";
+import { client, coupons, students, teams, users } from "@/lib/db";
 import { generate } from "random-words";
 import env from "../../env";
 import { hashSync } from "bcryptjs";
@@ -19,12 +19,42 @@ async function seedStudents(arr: number[]) {
   await teams.deleteMany();
   await students.deleteMany();
   await users.deleteMany();
+  await coupons.deleteMany();
 
   await users.insertOne({
     username: "admin",
     password: hashSync("password"),
     role: "admin",
   });
+
+  await users.insertOne({
+    username: "vendor",
+    password: hashSync("vendor123"),
+    role: "vendor",
+  });
+
+  await coupons.insertMany([
+    {
+      type: "day1Lunch",
+      count: 0,
+    },
+    {
+      type: "day1Snack",
+      count: 0,
+    },
+    {
+      type: "day1Dinner",
+      count: 0,
+    },
+    {
+      type: "day2Break",
+      count: 0,
+    },
+    {
+      type: "day2Lunch",
+      count: 0,
+    },
+  ]);
 
   const foodKey = await importKey(env.FOOD_KEY);
   const entryKey = await importKey(env.ENTRY_KEY);

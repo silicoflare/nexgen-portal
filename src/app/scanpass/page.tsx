@@ -3,11 +3,12 @@
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { entryAtom } from "@/lib/atoms";
+import { withAuth } from "@/withAuth";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 
-export default function ScanPass() {
+function ScanPass() {
   const [, setVal] = useAtom(entryAtom);
   const router = useRouter();
 
@@ -49,3 +50,6 @@ export default function ScanPass() {
     </div>
   );
 }
+
+ScanPass.auth = ["admin"];
+export default withAuth(ScanPass);

@@ -11,20 +11,27 @@ import { Student, Team } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import StudentDetails from "./StudentInfo";
 import PaymentInfo from "./PaymentInfo";
+import Loading from "@/components/Loading";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { withAuth } from "@/withAuth";
 
-export default function CheckIn() {
+function CheckIn() {
   const [val] = useAtom(entryAtom);
+  const router = useRouter();
 
   const { data, isLoading } = useSWR("teamdata", async () => {
     return await getEntryDetails(val);
   });
 
+  useEffect(() => {
+    if (val === "" || !val) {
+      router.push("/scanpass");
+    }
+  }, [val, router]);
+
   if (isLoading || !data) {
-    return (
-      <div className="w-full h-full flex flex-col items-center justify-center">
-        <Loader2Icon size={30} className="animate-spin" />
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
@@ -53,3 +60,6 @@ export default function CheckIn() {
     )
   );
 }
+
+CheckIn.auth = ["admin"];
+export default withAuth(CheckIn);

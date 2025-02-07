@@ -1,30 +1,30 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
-import useSession from "@/hooks/useSession";
 import { LoaderCircleIcon } from "lucide-react";
 import QRCode from "react-qr-code";
-import { QRCodeSVG } from "qrcode.react";
 import { getQRContent } from "./fx";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { withAuth } from "@/withAuth";
+import { useSession } from "next-auth/react";
 
-export default function EntryPass() {
-  const { user, loading } = useSession();
+function EntryPass() {
+  const { data: session, status } = useSession();
   const [qr, setQR] = useState("");
   const { theme } = useTheme();
 
   useEffect(() => {
     async function set() {
-      if (user) {
-        setQR(await getQRContent(user.id));
+      if (session) {
+        setQR(await getQRContent(session.user.id));
       }
     }
 
     set();
-  }, [loading]);
+  }, [status]);
 
-  return loading ? (
+  return status === "loading" ? (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
       <LoaderCircleIcon className="animate-spin" size={30} />
     </div>
@@ -42,3 +42,6 @@ export default function EntryPass() {
     </div>
   );
 }
+
+EntryPass.auth = ["participant"];
+export default withAuth(EntryPass);

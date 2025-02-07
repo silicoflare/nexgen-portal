@@ -1,21 +1,19 @@
 "use client";
 
-import Navbar from "@/components/Navbar";
+import Loading from "@/components/Loading";
 import menuItems from "@/data/menuItems";
-import useSession from "@/hooks/useSession";
-import { LoaderCircleIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { withAuth } from "@/withAuth";
 
-export default function Menu() {
-  const { user, loading } = useSession();
+function Menu() {
+  const { data: session, status } = useSession();
 
-  return loading ? (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <LoaderCircleIcon className="animate-spin" size={30} />
-    </div>
+  return status === "loading" || !session ? (
+    <Loading />
   ) : (
     <div className="w-full h-full px-5 flex flex-col items-center justify-center gap-5">
-      {menuItems[user!.role].map((x) => (
+      {menuItems[session.user!.role].map((x) => (
         <Link
           href={x.route}
           key={x.route}
@@ -27,3 +25,6 @@ export default function Menu() {
     </div>
   );
 }
+
+Menu.auth = ["participant", "vendor", "admin"];
+export default withAuth(Menu);

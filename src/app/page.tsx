@@ -15,9 +15,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { signIn } from "@/lib/auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function Home() {
   const router = useRouter();
@@ -36,21 +36,19 @@ export default function Home() {
   });
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    const res = await signIn(data.username, data.password);
+    const res = await signIn("credentials", {
+      username: data.username,
+      password: data.password,
+      redirect: false,
+    });
 
-    switch (res.status) {
-      case 404:
-        toast.error(`User ${data.username} not found`);
-        return;
-
-      case 401:
-        toast.error("Wrong password");
-        return;
-
-      case 200:
-        toast.success("Logged in successfully!");
-        router.push("/menu");
+    if (res && !res.ok) {
+      toast.error(res.error);
+      return;
     }
+
+    toast.success("Signed in successfully!");
+    router.push("/menu");
   }
 
   return (
