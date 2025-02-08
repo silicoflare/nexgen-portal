@@ -1,25 +1,15 @@
 import { encrypt, importKey } from "@/lib/crypto";
-import { client, coupons, students, teams, users } from "@/lib/db";
-import { generate } from "random-words";
+import { coupons, snacks, students, teams, users } from "@/lib/db";
 import env from "../../env";
 import { hashSync } from "bcryptjs";
+import { TeamImport } from "../../prepdb";
 
-function random<T>(arr: T[]) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-const collegeNames = ["PES University", "IIT", "Amrita", "BITS", "RV", "DSU"];
-// const collegeNames = ["PES University"];
-
-const tracks = ["Open Innovation", "AI/ML", "Dev Tools", "EdTech"];
-
-const semesters = ["II", "IV", "VI"];
-
-async function seedStudents(arr: number[]) {
+export async function seedStudents(teamData: TeamImport) {
   await teams.deleteMany();
   await students.deleteMany();
   await users.deleteMany();
   await coupons.deleteMany();
+  await snacks.deleteMany();
 
   await users.insertOne({
     username: "admin",
@@ -59,26 +49,24 @@ async function seedStudents(arr: number[]) {
   const foodKey = await importKey(env.FOOD_KEY);
   const entryKey = await importKey(env.ENTRY_KEY);
 
-  for (let i = 0; i < arr.length; i++) {
-    const t = arr[i];
-    const selectedCollege = random(collegeNames);
+  for (let i = 0; i < teamData.length; i++) {
+    const t = teamData[i];
     await teams.insertOne({
       teamNo: i + 1,
-      college: selectedCollege,
-      track: random(tracks),
+      college: t.college,
+      track: t.track,
       entryPass: await encrypt(`T${i + 1}_ENTRY`, entryKey),
     });
-    for (let j = 1; j <= t; j++) {
-      const isHostel = Math.floor(Math.random() * 2);
-
+    for (let j = 0; j < t.students.length; j++) {
+      const st = t.students[j];
       const data: { [key: string]: any } = {
         team: i + 1,
         id: `N2T${(i + 1).toString().padStart(2, "0")}${"ABCD".charAt(j - 1)}`,
-        name: generate({ minLength: 4, exactly: 1 })[0] as string,
-        semester: random(semesters),
-        srn: "ABC123",
-        email: "foo@gmail.com",
-        phone: 9876543210,
+        name: st.name,
+        semester: st.semester,
+        srn: st.srn,
+        email: st.email,
+        phone: st.phone,
         top10: false,
         coupons: {
           day1Lunch: {
@@ -129,14 +117,14 @@ async function seedStudents(arr: number[]) {
         role: "participant",
       });
 
-      if (selectedCollege === collegeNames[0]) {
-        if (isHostel) {
+      if (t.college === "PES University") {
+        if (st.hostel) {
           data["residence"] = "hostel";
           data["hostel"] = {
-            type: random(["boys", "girls"]),
-            room: Math.floor(Math.random() * 1000) + 100,
-            guardianName: generate(1)[0] as string,
-            guardianPhone: 1234567890,
+            type: st.hostel.type,
+            room: st.hostel.room,
+            guardianName: st.hostel.guardianName,
+            guardianPhone: st.hostel.guardianPhone,
           };
         } else {
           data["residence"] = "day-scholar";
@@ -148,13 +136,10 @@ async function seedStudents(arr: number[]) {
         console.log(
           `Username: ${data.id}, Password: ${`${(data["name"] as string)
             .slice(0, 4)
-            .toUpperCase()}${i + 1}${"ABCD".charAt(
-            j - 1
-          )}`}, College: ${selectedCollege}`
+            .toUpperCase()}${i + 1}${"ABCD".charAt(j - 1)}`}, College: ${
+            t.college
+          }`
         );
     }
   }
 }
-
-await seedStudents([3, 4, 3, 4, 4]);
-await client.close();

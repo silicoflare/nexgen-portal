@@ -9,9 +9,9 @@ const HOST = process.env.HOST || "127.0.0.1"; // Set the IP to bind
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
 // SSL Certificate Paths
-const keyPath = process.env.SSL_KEY || join(process.cwd(), ".certs", "key.pem");
+const keyPath = process.env.SSL_KEY || join(process.cwd(), "certs", "key.pem");
 const certPath =
-  process.env.SSL_CERT || join(process.cwd(), ".certs", "cert.pem");
+  process.env.SSL_CERT || join(process.cwd(), "certs", "cert.pem");
 
 // Ensure SSL certificates exist
 if (!existsSync(keyPath) || !existsSync(certPath)) {

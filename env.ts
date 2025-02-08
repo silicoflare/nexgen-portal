@@ -19,6 +19,6 @@ const env = {
   NEXTAUTH_SECRET: getEnv("NEXTAUTH_SECRET"),
   ENTRY_KEY: getEnv("ENTRY_KEY"),
   FOOD_KEY: getEnv("FOOD_KEY"),
-}
+};
 
 export default env;
