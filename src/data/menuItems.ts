@@ -12,6 +12,10 @@ const menuItems: { [key: string]: { label: string; route: string }[] } = {
       label: "Snacks log",
       route: "/snackslog",
     },
+    {
+      label: "Select Top 10 teams",
+      route: "/top10",
+    },
   ],
   vendor: [
     {
