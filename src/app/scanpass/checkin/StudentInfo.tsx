@@ -89,64 +89,68 @@ export default function StudentDetails({
         <div className="w-full flex items-center justify-between gap-3">
           <div className="w-full flex flex-col items-center text-xl gap-1">
             Present?
-            {present === null ? (
+            <div className="w-full flex items-center justify-center gap-2">
+              <Button
+                variant="outline"
+                className={cn(
+                  "aspect-square border-green-600",
+                  present
+                    ? "text-background bg-green-600"
+                    : "text-green-600 bg-background"
+                )}
+                onClick={() => getAtt(true)}
+              >
+                <CheckIcon size={20} />
+              </Button>
+              <Button
+                variant="outline"
+                className={cn(
+                  "aspect-square border-red-600",
+                  present !== null
+                    ? present
+                      ? "text-red-600 bg-background"
+                      : "text-background bg-red-600"
+                    : "text-red-600 bg-background"
+                )}
+                onClick={() => getAtt(false)}
+              >
+                <XIcon size={20} />
+              </Button>
+            </div>
+          </div>
+          {details.hostel && (
+            <div className="w-full flex flex-col items-center text-xl gap-1">
+              Consent?
               <div className="w-full flex items-center justify-center gap-2">
                 <Button
                   variant="outline"
-                  className="border-green-500 text-green-500 aspect-square"
-                  onClick={() => getAtt(true)}
+                  disabled={!present}
+                  className={cn(
+                    "aspect-square border-green-600",
+                    consent
+                      ? "text-background bg-green-600"
+                      : "text-green-600 bg-background"
+                  )}
+                  onClick={() => getCon(true)}
                 >
                   <CheckIcon size={20} />
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-red-500 text-red-500 aspect-square"
-                  onClick={() => getAtt(false)}
+                  disabled={!present}
+                  className={cn(
+                    "aspect-square border-red-600",
+                    consent !== null
+                      ? consent
+                        ? "text-red-600 bg-background"
+                        : "text-background bg-red-600"
+                      : "text-red-600 bg-background"
+                  )}
+                  onClick={() => getCon(false)}
                 >
                   <XIcon size={20} />
                 </Button>
               </div>
-            ) : (
-              <div
-                className={cn(
-                  "w-full text-center text-base",
-                  present ? "text-green-500" : "text-red-500"
-                )}
-              >
-                {present ? "Present" : "Absent"}
-              </div>
-            )}
-          </div>
-          {details.hostel && (
-            <div className="w-full flex flex-col items-center text-xl gap-1">
-              Consent?
-              {consent === null ? (
-                <div className="w-full flex items-center justify-center gap-2">
-                  <Button
-                    variant="outline"
-                    className="border-green-500 text-green-500 aspect-square"
-                    onClick={() => getCon(true)}
-                  >
-                    <CheckIcon size={20} />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="border-red-500 text-red-500 aspect-square"
-                    onClick={() => getCon(false)}
-                  >
-                    <XIcon size={20} />
-                  </Button>
-                </div>
-              ) : (
-                <div
-                  className={cn(
-                    "w-full text-center text-base",
-                    consent ? "text-green-500" : "text-red-500"
-                  )}
-                >
-                  {consent ? "Taken" : "Not taken"}
-                </div>
-              )}
             </div>
           )}
         </div>
