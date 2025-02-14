@@ -56,17 +56,17 @@ export default function StudentDetails({
             <div className="font-bold">Phone</div>
             {details.phone}
           </div>
-          <div className="flex flex-col items-start gap-1 leading-none w-full">
-            <div className="font-bold">Email</div>
-            {details.email}
-          </div>
-          {details.residence && (
-            <div className="flex flex-col items-end gap-1 leading-none w-full">
-              <div className="font-bold">Residence</div>
-              {details.residence}
-            </div>
-          )}
         </div>
+        <div className="flex flex-col items-start gap-1 leading-none w-full">
+          <div className="font-bold">Email</div>
+          {details.email}
+        </div>
+        {details.residence && (
+          <div className="flex flex-col items-start gap-1 leading-none w-full">
+            <div className="font-bold">Residence</div>
+            {details.residence}
+          </div>
+        )}
         {details.hostel && (
           <div className="w-full flex flex-col items-start">
             <div className="font-bold text-xl">Hostel Details</div>

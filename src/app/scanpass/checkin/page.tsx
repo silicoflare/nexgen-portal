@@ -15,6 +15,7 @@ import Loading from "@/components/Loading";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { withAuth } from "@/withAuth";
+import { Button } from "@/components/ui/button";
 
 function CheckIn() {
   const [val] = useAtom(entryAtom);
@@ -51,11 +52,12 @@ function CheckIn() {
             ))}
           </CardContent>
         </Card>
-        <PaymentInfo
-          details={data.team as Team}
-          count={data.student.length}
-          team={data.team.teamNo}
-        />
+        <div className="w-full my-5 flex flex-col items-center justify-center">
+          <Button variant="outline" onClick={() => router.push("/scanpass")}>
+            Back
+          </Button>
+          <div className="p-5"> </div>
+        </div>
       </div>
     )
   );
