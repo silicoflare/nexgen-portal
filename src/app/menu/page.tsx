@@ -26,5 +26,5 @@ function Menu() {
   );
 }
 
-Menu.auth = ["participant", "vendor", "admin"];
+Menu.auth = ["participant", "vendor", "admin", "snacks", "sudo"];
 export default withAuth(Menu);

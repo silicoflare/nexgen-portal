@@ -6,6 +6,7 @@ import { changeTop10, getTop10 } from "./fx";
 import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useState } from "react";
 
 function Top10() {
   const { data: teamNums, mutate } = useSWR(
@@ -48,5 +49,5 @@ function Top10() {
   );
 }
 
-Top10.auth = ["admin"];
+Top10.auth = ["sudo"];
 export default withAuth(Top10);

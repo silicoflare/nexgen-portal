@@ -7,12 +7,9 @@ import { Loader2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import DeleteSnack from "../DeleteSnack";
+import { withAuth } from "@/withAuth";
 
-export default function SnackLogger({
-  params,
-}: {
-  params: Promise<{ snackID: string }>;
-}) {
+function SnackLogger({ params }: { params: Promise<{ snackID: string }> }) {
   const snackID = use(params).snackID;
 
   const { data: snackData, mutate } = useSWR("snackdata", async () =>
@@ -57,3 +54,6 @@ export default function SnackLogger({
     </div>
   );
 }
+
+SnackLogger.auth = ["snacks", "sudo"];
+export default withAuth(SnackLogger);

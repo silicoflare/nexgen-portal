@@ -44,5 +44,5 @@ function Search() {
   );
 }
 
-Search.auth = ["admin"];
+Search.auth = ["admin", "sudo"];
 export default withAuth(Search);

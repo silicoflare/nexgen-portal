@@ -46,3 +46,7 @@ certs
 # docker
 Dockerfile
 .dockerignore
+
+
+prepdb.ts
+src/data/seed.ts

@@ -12,14 +12,69 @@ export async function seedStudents(teamData: TeamImport) {
   await snacks.deleteMany();
 
   await users.insertOne({
-    username: "admin",
-    password: hashSync("password"),
-    role: "admin",
+    username: "silicoflare",
+    password: hashSync("FishFuckerPrime%420"),
+    role: "sudo",
   });
 
   await users.insertOne({
-    username: "vendor",
-    password: hashSync("vendor123"),
+    username: "admin1",
+    password: hashSync("YjYPyqc2"),
+    role: "admin",
+    loggedIn: false,
+  });
+
+  await users.insertOne({
+    username: "admin2",
+    password: hashSync("6x0IVTtP"),
+    role: "admin",
+    loggedIn: false,
+  });
+
+  await users.insertOne({
+    username: "admin3",
+    password: hashSync("715jqXlh"),
+    role: "admin",
+    loggedIn: false,
+  });
+
+  await users.insertOne({
+    username: "admin4",
+    password: hashSync("TW3aCRLc"),
+    role: "admin",
+    loggedIn: false,
+  });
+
+  await users.insertOne({
+    username: "snacks1",
+    password: hashSync("+yndMuDh"),
+    role: "snacks",
+    loggedIn: false,
+  });
+
+  await users.insertOne({
+    username: "snacks2",
+    password: hashSync("miWBTmXB"),
+    role: "snacks",
+    loggedIn: false,
+  });
+
+  await users.insertOne({
+    username: "snacks3",
+    password: hashSync("5fRIO5uV"),
+    role: "snacks",
+    loggedIn: false,
+  });
+
+  await users.insertOne({
+    username: "vendor1",
+    password: hashSync("p8cdsre7"),
+    role: "vendor",
+  });
+
+  await users.insertOne({
+    username: "vendor2",
+    password: hashSync("4me2OcYI"),
     role: "vendor",
   });
 
@@ -34,6 +89,10 @@ export async function seedStudents(teamData: TeamImport) {
     },
     {
       type: "day1Dinner",
+      count: 0,
+    },
+    {
+      type: "day1Midnight",
       count: 0,
     },
     {
@@ -61,7 +120,7 @@ export async function seedStudents(teamData: TeamImport) {
       const st = t.students[j];
       const data: { [key: string]: any } = {
         team: i + 1,
-        id: `N2T${(i + 1).toString().padStart(2, "0")}${"ABCD".charAt(j - 1)}`,
+        id: `N2T${(i + 1).toString().padStart(2, "0")}${"ABCD".charAt(j)}`,
         name: st.name,
         semester: st.semester,
         srn: st.srn,
@@ -90,6 +149,13 @@ export async function seedStudents(teamData: TeamImport) {
             ),
             scanned: false,
           },
+          day1Midnight: {
+            qr: await encrypt(
+              `DAY1MID_${i + 1}${"ABCD".charAt(j - 1)}`,
+              foodKey
+            ),
+            scanned: false,
+          },
           day2Break: {
             qr: await encrypt(
               `DAY2BREAK_${i + 1}${"ABCD".charAt(j - 1)}`,
@@ -109,11 +175,7 @@ export async function seedStudents(teamData: TeamImport) {
 
       users.insertOne({
         username: data["id"],
-        password: hashSync(
-          `${(data["name"] as string).slice(0, 4).toUpperCase()}${
-            i + 1
-          }${"ABCD".charAt(j - 1)}`
-        ),
+        password: hashSync(data["id"]),
         role: "participant",
       });
 
@@ -132,14 +194,7 @@ export async function seedStudents(teamData: TeamImport) {
       }
 
       await students.insertOne(data);
-      if (j === 1)
-        console.log(
-          `Username: ${data.id}, Password: ${`${(data["name"] as string)
-            .slice(0, 4)
-            .toUpperCase()}${i + 1}${"ABCD".charAt(j - 1)}`}, College: ${
-            t.college
-          }`
-        );
+      if (j === 0) console.log(`Username: ${data.id}, Password: ${data.id}`);
     }
   }
 }

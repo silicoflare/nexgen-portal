@@ -41,5 +41,5 @@ function SnacksLog() {
   );
 }
 
-SnacksLog.auth = ["admin"];
+SnacksLog.auth = ["snacks", "sudo"];
 export default withAuth(SnacksLog);

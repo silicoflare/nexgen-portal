@@ -4,13 +4,10 @@ import { entryAtom } from "@/lib/atoms";
 import { useAtom } from "jotai";
 import useSWR from "swr";
 import { getEntryDetails } from "./fx";
-import Navbar from "@/components/Navbar";
-import { Loader2Icon } from "lucide-react";
 import TeamDetails from "./TeamDetails";
 import { Student, Team } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import StudentDetails from "./StudentInfo";
-import PaymentInfo from "./PaymentInfo";
 import Loading from "@/components/Loading";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -63,5 +60,5 @@ function CheckIn() {
   );
 }
 
-CheckIn.auth = ["admin"];
+CheckIn.auth = ["admin", "sudo"];
 export default withAuth(CheckIn);

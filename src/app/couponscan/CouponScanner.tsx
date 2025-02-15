@@ -10,7 +10,6 @@ import {
 import { couponTypes } from "@/data/constants";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { decryptFoodQR, getCouponCount } from "./fx";
-import { toast } from "sonner";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";

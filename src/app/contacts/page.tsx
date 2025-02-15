@@ -19,5 +19,5 @@ function Contacts() {
   );
 }
 
-Contacts.auth = ["vendor", "participant"];
+Contacts.auth = ["vendor", "participant", "admin", "sudo", "snacks"];
 export default withAuth(Contacts);

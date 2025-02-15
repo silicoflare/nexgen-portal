@@ -63,5 +63,5 @@ function ScanPass() {
   );
 }
 
-ScanPass.auth = ["admin"];
+ScanPass.auth = ["admin", "sudo"];
 export default withAuth(ScanPass);
