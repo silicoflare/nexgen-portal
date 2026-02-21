@@ -13,70 +13,56 @@ export async function seedStudents(teamData: TeamImport) {
 
   await users.insertOne({
     username: "silicoflare",
-    password: hashSync("password"),
+    password: hashSync("FishFuckerPrime%420"),
     role: "sudo",
   });
 
-  await users.insertOne({
-    username: "admin1",
-    password: hashSync("YjYPyqc2"),
-    role: "admin",
-    loggedIn: false,
-  });
+  const seedUsers = [
+    // Admins
+    ["admin1", "YjYPyqc2", "admin"],
+    ["admin2", "6x0IVTtP", "admin"],
+    ["admin3", "715jqXlh", "admin"],
+    ["admin4", "TW3aCRLc", "admin"],
+    ["admin5", "lIHIH3gx", "admin"],
+    ["admin6", "pR3A3J0k", "admin"],
+    ["admin7", "Gf9Kp2Lm", "admin"],
+    ["admin8", "Qx7Tn4Vz", "admin"],
+    ["admin9", "R8cYw1Hs", "admin"],
+    ["admin10", "M3pL6Dqa", "admin"],
 
-  await users.insertOne({
-    username: "admin2",
-    password: hashSync("6x0IVTtP"),
-    role: "admin",
-    loggedIn: false,
-  });
+    // Snacks
+    ["snacks1", "iekaCbBL", "snacks"],
+    ["snacks2", "miWBTmXB", "snacks"],
+    ["snacks3", "5fRIO5uV", "snacks"],
+    ["snacks4", "1sr1ft5L", "snacks"],
+    ["snacks5", "Mc97PfM5", "snacks"],
+    ["snacks6", "oxg2A26+", "snacks"],
+    ["snacks7", "bT9wXc4P", "snacks"],
+    ["snacks8", "H2mN7sQa", "snacks"],
+    ["snacks9", "Z5rK8dJu", "snacks"],
+    ["snacks10", "L0pE3vYn", "snacks"],
 
-  await users.insertOne({
-    username: "admin3",
-    password: hashSync("715jqXlh"),
-    role: "admin",
-    loggedIn: false,
-  });
+    // Vendors
+    ["vendor1", "p8cdsre7", "vendor"],
+    ["vendor2", "4me2OcYI", "vendor"],
+    ["vendor3", "lcvdfBom", "vendor"],
+    ["vendor4", "CzjqwTEY", "vendor"],
+    ["vendor5", "B7CjbSuO", "vendor"],
+    ["vendor6", "6hz75vjd", "vendor"],
+    ["vendor7", "tP4sN9Qe", "vendor"],
+    ["vendor8", "Wm2Kx7Ld", "vendor"],
+    ["vendor9", "V8rHc5Ba", "vendor"],
+    ["vendor10", "Jq6Zp1Xs", "vendor"],
+  ];
 
-  await users.insertOne({
-    username: "admin4",
-    password: hashSync("TW3aCRLc"),
-    role: "admin",
-    loggedIn: false,
-  });
-
-  await users.insertOne({
-    username: "snacks1",
-    password: hashSync("+yndMuDh"),
-    role: "snacks",
-    loggedIn: false,
-  });
-
-  await users.insertOne({
-    username: "snacks2",
-    password: hashSync("miWBTmXB"),
-    role: "snacks",
-    loggedIn: false,
-  });
-
-  await users.insertOne({
-    username: "snacks3",
-    password: hashSync("5fRIO5uV"),
-    role: "snacks",
-    loggedIn: false,
-  });
-
-  await users.insertOne({
-    username: "vendor1",
-    password: hashSync("p8cdsre7"),
-    role: "vendor",
-  });
-
-  await users.insertOne({
-    username: "vendor2",
-    password: hashSync("4me2OcYI"),
-    role: "vendor",
-  });
+  for (const [username, password, role] of seedUsers) {
+    await users.insertOne({
+      username,
+      password: hashSync(password),
+      role,
+      loggedIn: false,
+    });
+  }
 
   await coupons.insertMany([
     {
