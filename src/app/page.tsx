@@ -16,10 +16,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 export default function Home() {
   const router = useRouter();
+  const session = useSession();
+
+  if (session.data) {
+    router.push("/menu");
+  }
 
   const formSchema = z.object({
     username: z.string(),
