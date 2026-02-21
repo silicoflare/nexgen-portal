@@ -24,7 +24,7 @@ export async function decryptFoodQR(id: string, qr: string) {
 
   const team = match[1];
   const member = match[2];
-  const participantID = `N2T${team.padStart(2, "0")}${member}`;
+  const participantID = `NJT${team.padStart(2, "0")}${member}`;
 
   const student = await students.findOne({
     id: participantID,
