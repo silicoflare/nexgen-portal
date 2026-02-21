@@ -28,7 +28,7 @@ export default function CouponDisplay({
   ];
 }) {
   const { data: session } = useSession();
-  const { resolvedTheme } = useTheme();
+  const { theme } = useTheme();
 
   const [confetti] = useState(new JSConfetti());
 
@@ -64,7 +64,7 @@ export default function CouponDisplay({
               value={coupon[1].qr}
               bgColor="none"
               className=""
-              fgColor={resolvedTheme === "dark" ? "white" : "black"}
+              fgColor={theme === "dark" ? "white" : "black"}
             />
           </div>
         </DialogHeader>

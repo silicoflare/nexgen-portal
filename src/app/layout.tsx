@@ -39,7 +39,7 @@ export default function RootLayout({
       <body className={`${raleway.className} antialiased`}>
         <SessionHandler>
           <Toaster richColors position="bottom-center" className="z-50" />
-          <ThemeProvider attribute="class">
+          <ThemeProvider attribute="class" enableSystem={false}>
             <NavLayout>{children}</NavLayout>
           </ThemeProvider>
         </SessionHandler>
