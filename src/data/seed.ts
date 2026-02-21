@@ -13,7 +13,7 @@ export async function seedStudents(teamData: TeamImport) {
 
   await users.insertOne({
     username: "silicoflare",
-    password: hashSync("FishFuckerPrime%420"),
+    password: hashSync("password"),
     role: "sudo",
   });
 
@@ -97,6 +97,7 @@ export async function seedStudents(teamData: TeamImport) {
   const entryKey = await importKey(env.ENTRY_KEY);
 
   for (let i = 0; i < teamData.length; i++) {
+    console.log("Inserting team", i + 1)
     const t = teamData[i];
     await teams.insertOne({
       teamNo: i + 1,
@@ -106,6 +107,7 @@ export async function seedStudents(teamData: TeamImport) {
     });
     for (let j = 0; j < t.students.length; j++) {
       const st = t.students[j];
+      if (!st.name) continue
       const data: { [key: string]: any } = {
         team: i + 1,
         id: `NJT${(i + 1).toString().padStart(2, "0")}${"ABCD".charAt(j)}`,
@@ -161,7 +163,6 @@ export async function seedStudents(teamData: TeamImport) {
       }
 
       await students.insertOne(data);
-      if (j === 0) console.log(`Username: ${data.id}, Password: ${data.id}`);
     }
   }
 }

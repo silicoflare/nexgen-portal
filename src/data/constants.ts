@@ -6,10 +6,10 @@ export const couponTypes = {
 
 export const importantContacts = [
   {
-    name: "Vineet Sharma",
+    name: "Ahana Sharan",
     title: "Club Head",
-    phone: "8660282426",
-    email: "vineetsharma3481@gmail.com",
+    phone: "7349355004",
+    email: "ahana.sharan@gmail.com",
   },
   {
     name: "Dennis Philip",
@@ -21,12 +21,6 @@ export const importantContacts = [
     name: "Pavan A",
     title: "Faculty in-charge",
     phone: "9481187128",
-    email: "",
-  },
-  {
-    name: "Sowmyashree",
-    title: "Faculty in-charge",
-    phone: "7259137771",
     email: "",
   },
 ];

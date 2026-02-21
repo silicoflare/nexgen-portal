@@ -34,7 +34,7 @@ export function unflatten(row: Record<string, any>) {
   const result: any = {};
 
   for (const [key, value] of Object.entries(row)) {
-    if (value === "" || value == null) continue;
+    if (value === "" || value == null || value == "-") continue;
     setDeep(result, key, value);
   }
 

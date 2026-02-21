@@ -23,7 +23,7 @@ export type TeamImport = (Omit<Team, "entryPass"> & {
 
 async function prepDB(path: string) {
   const fileContent = readFileSync(path, "utf-8");
-  const res = (Papa.parse(fileContent, {
+  const res = (Papa.parse(fileContent.trim(), {
     header: true
   }).data as TeamImport).map((x) => {
     const { _id, ...other } = x;
