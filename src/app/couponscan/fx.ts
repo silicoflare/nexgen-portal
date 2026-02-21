@@ -15,6 +15,7 @@ export async function decryptFoodQR(id: string, qr: string) {
     return 401;
   }
 
+  console.log(res)
   const match = res.match(couponTypes[id as keyof typeof couponTypes].format);
 
   if (!match) {

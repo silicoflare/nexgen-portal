@@ -15,8 +15,8 @@ import NavLayout from "./NavLayout";
 import SessionHandler from "./SessionHandler";
 
 export const metadata: Metadata = {
-  title: "NexGen 2.0",
-  description: "Portal for NexGen 2.0",
+  title: "NexJam",
+  description: "Portal for NexJam",
 };
 
 const raleway = Raleway({ subsets: ["latin"] });

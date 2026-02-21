@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 import env from "../../env";
 
 export const client = new MongoClient(env.DATABASE_URL);
-const db = client.db("nexgen");
+const db = client.db("nexus");
 
 export const users = db.collection("users");
 export const teams = db.collection("teams");

@@ -24,7 +24,7 @@ export default function CouponDisplay({
     {
       qr: string;
       scanned: boolean;
-    }
+    },
   ];
 }) {
   const { data: session } = useSession();
@@ -33,17 +33,17 @@ export default function CouponDisplay({
   const [confetti] = useState(new JSConfetti());
 
   const { data: top10 } = useSWR("top10", async () =>
-    session ? await isTop10(session.user.id) : null
+    session ? await isTop10(session.user.id) : null,
   );
 
-  if (coupon[0] === "day2Lunch" && !top10) {
+  if (coupon[0] === "eveSnacks" && !top10) {
     return null;
   }
 
   return (
     <Dialog
       onOpenChange={(o) => {
-        if (o && coupon[0] === "day2Lunch" && top10) {
+        if (o && coupon[0] === "eveSnacks" && top10) {
           confetti.addConfetti({ confettiRadius: 5 });
         }
       }}

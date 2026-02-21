@@ -25,7 +25,7 @@ export default function Navbar() {
         className="font-semibold cursor-pointer"
         onClick={() => router.push("/")}
       >
-        NexGen 2.0
+        NexJam
       </h1>
       {session ? (
         <DropdownMenu>

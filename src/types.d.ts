@@ -18,7 +18,7 @@ export type Student = {
   present?: boolean;
   top10: boolean;
   coupons: Record<
-    "day1Lunch" | "day1Snack" | "day1Dinner" | "day2Break" | "day2Lunch",
+    "welcomeSnacks" | "lunch" | "eveSnacks",
     { qr: string; scanned: boolean }
   >;
   residence: "day-scholar" | "hostel";

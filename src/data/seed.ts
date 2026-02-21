@@ -80,29 +80,17 @@ export async function seedStudents(teamData: TeamImport) {
 
   await coupons.insertMany([
     {
-      type: "day1Lunch",
+      type: "welcomeSnacks",
       count: 0,
     },
     {
-      type: "day1Snack",
+      type: "lunch",
       count: 0,
     },
     {
-      type: "day1Dinner",
+      type: "eveSnacks",
       count: 0,
-    },
-    {
-      type: "day1Midnight",
-      count: 0,
-    },
-    {
-      type: "day2Break",
-      count: 0,
-    },
-    {
-      type: "day2Lunch",
-      count: 0,
-    },
+    }
   ]);
 
   const foodKey = await importKey(env.FOOD_KEY);
@@ -120,7 +108,7 @@ export async function seedStudents(teamData: TeamImport) {
       const st = t.students[j];
       const data: { [key: string]: any } = {
         team: i + 1,
-        id: `N2T${(i + 1).toString().padStart(2, "0")}${"ABCD".charAt(j)}`,
+        id: `NJT${(i + 1).toString().padStart(2, "0")}${"ABCD".charAt(j)}`,
         name: st.name,
         semester: st.semester,
         srn: st.srn,
@@ -128,44 +116,23 @@ export async function seedStudents(teamData: TeamImport) {
         phone: st.phone,
         top10: false,
         coupons: {
-          day1Lunch: {
+          welcomeSnacks: {
             qr: await encrypt(
-              `DAY1LUNCH_${i + 1}${"ABCD".charAt(j - 1)}`,
+              `WELCOMESNACK_${i + 1}${"ABCD".charAt(j)}`,
               foodKey
             ),
             scanned: false,
           },
-          day1Snack: {
+          lunch: {
             qr: await encrypt(
-              `DAY1SNACK_${i + 1}${"ABCD".charAt(j - 1)}`,
+              `LUNCH_${i + 1}${"ABCD".charAt(j)}`,
               foodKey
             ),
             scanned: false,
           },
-          day1Dinner: {
+          eveSnacks: {
             qr: await encrypt(
-              `DAY1DINE_${i + 1}${"ABCD".charAt(j - 1)}`,
-              foodKey
-            ),
-            scanned: false,
-          },
-          day1Midnight: {
-            qr: await encrypt(
-              `DAY1MID_${i + 1}${"ABCD".charAt(j - 1)}`,
-              foodKey
-            ),
-            scanned: false,
-          },
-          day2Break: {
-            qr: await encrypt(
-              `DAY2BREAK_${i + 1}${"ABCD".charAt(j - 1)}`,
-              foodKey
-            ),
-            scanned: false,
-          },
-          day2Lunch: {
-            qr: await encrypt(
-              `DAY2LUNCH_${i + 1}${"ABCD".charAt(j - 1)}`,
+              `EVESNACKS_${i + 1}${"ABCD".charAt(j)}`,
               foodKey
             ),
             scanned: false,

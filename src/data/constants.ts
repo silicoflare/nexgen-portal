@@ -1,16 +1,7 @@
 export const couponTypes = {
-  day1Lunch: { label: "Day 1 Lunch", format: /DAY1LUNCH_(\d{1,2})([ABCD])/ },
-  day1Snack: { label: "Day 1 Snack", format: /DAY1SNACK_(\d{1,2})([ABCD])/ },
-  day1Dinner: { label: "Day 1 Dinner", format: /DAY1DINE_(\d{1,2})([ABCD])/ },
-  day1Midnight: {
-    label: "Day 1 Midnight Snacks",
-    format: /DAY1MID_(\d{1,2})([ABCD])/,
-  },
-  day2Break: {
-    label: "Day 2 Breakfast",
-    format: /DAY2BREAK_(\d{1,2})([ABCD])/,
-  },
-  day2Lunch: { label: "Day 2 Lunch", format: /DAY2LUNCH_(\d{1,2})([ABCD])/ },
+  welcomeSnacks: { label: "Welcome Snacks", format: /WELCOMESNACK_(\d{1,2})([ABCD])/ },
+  lunch: { label: "Lunch", format: /LUNCH_(\d{1,2})([ABCD])/ },
+  eveSnacks: { label: "Evening Snacks", format: /EVESNACKS_(\d{1,2})([ABCD])/ },
 };
 
 export const importantContacts = [
