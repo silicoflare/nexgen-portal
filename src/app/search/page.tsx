@@ -30,7 +30,7 @@ function Search() {
             variant="outline"
             className={cn(
               "w-10 h-10 p-5",
-              team?.find((a) => a.team === x) && "bg-green-500",
+              team?.find((a) => a.team === x)?.present && "bg-green-500",
             )}
             key={x}
             onClick={async () => {
