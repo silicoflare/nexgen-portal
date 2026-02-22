@@ -6,10 +6,15 @@ import Link from "next/link";
 import { useAtom } from "jotai";
 import { entryAtom } from "@/lib/atoms";
 import { useRouter } from "next/navigation";
+import useSWR from "swr";
+import { getPresentTeams } from "@/app/search/fx";
+import { cn } from "@/lib/utils";
 
 function Search() {
   const [, set] = useAtom(entryAtom);
   const router = useRouter();
+
+  const { data: team } = useSWR("present-teams", () => getPresentTeams());
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-7 px-10">
@@ -23,7 +28,10 @@ function Search() {
         {Array.from({ length: 35 }, (_, i) => i + 1).map((x) => (
           <Button
             variant="outline"
-            className="w-10 h-10 p-5"
+            className={cn(
+              "w-10 h-10 p-5",
+              team?.find((a) => a.team === x) && "bg-green-500",
+            )}
             key={x}
             onClick={async () => {
               set(x);
